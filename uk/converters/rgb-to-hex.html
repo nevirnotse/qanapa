@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <title>Конвертувати RGB в HEX онлайн</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="qanapa.com: RGB в HEX онлайн конвертер">
+    <meta name="keywords" content="css, color, html, online tool, web, онлайн, rgb, hex">
+
+    <meta content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href='../../styles/normalize.css' rel='stylesheet' type='text/css'>
+    <link href='../../styles/sakura.css' rel='stylesheet' type='text/css'>
+    <link href='../../styles/qanapa.css' rel='stylesheet' type='text/css'>
+    <script src="../../javascripts/converters/rgb2hex.js"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+</head>
+
+<body>
+    <nav class="text-center">
+        <hr>
+        <a href="../../index.html" class="logo">qanapa.com</a>
+        <p>онлайн-інструменти</p>
+        <hr>
+    </nav>
+    <div id="form" class="text-center">
+        <label for="color">Конвертувати RGB в HEX</label>
+        <span>Введіть значення нижче. У форматі <strong class="format"></strong> і натисніть OK</span>
+        <br>
+        <br>
+        <form type="submit">
+            <input type='text' id='colorInput' />
+            <input type='submit' id='goToUrlButton' value="OK"/>
+        </form>
+        <hr>
+    </div>
+    <div id="result" class="text-center">
+        <h1>Конвертувати RGB <strong class="value"></strong> в HEX</h1>
+        <p>Конвертуємо колір RGB в HEX онлайн. Безкоштовний веб-конвертер.</p>
+
+        <p>RGB: <strong class="value"></strong></p>
+        <p>HEX: <strong class="result"></strong></p>
+
+        <p>
+            <a href="../../uk/converters/rgb-to-hex.html">Конвертувати інший колір RGB в HEX</a>
+        </p>
+    </div>
+    <h2>Приклади RGB / HEX конвертацій:</h2>
+    <div id="related-colors">
+    </div>
+    <br>
+    <div id="color-converters-list" class="text-center">
+        <p>Інші конвертери кольору:</p>
+        <ul>
+            <li>
+                <a href="../../uk/converters/cmyk-to-rgb.html">Конвертувати CMYK в RGB</a>
+            </li>
+            <li>
+                <a href="../../uk/converters/hex-to-rgb.html">Конвертувати HEX в RGB</a>
+            </li>
+            <li>
+                <a href="../../uk/converters/hwb-to-rgb.html">Конвертувати HWB в RGB</a>
+            </li>
+            <li>
+                <a href="../../uk/converters/rgb-to-cmyk.html">Конвертувати RGB в CMYK</a>
+            </li>
+            <li>
+                <a href="../../uk/converters/rgb-to-hwb.html">Конвертувати RGB в HWB</a>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        let colorInput = document.getElementById('colorInput');
+        let inputFormat = '195,0,0'
+
+        // Go to url
+        function goToUrl(){
+            window.location = colorInput.value;
+            window.location = window.location.pathname + '?value=' + document.getElementById('colorInput').value;
+        }
+        document.getElementById('form').addEventListener('submit', function(evt){
+            evt.preventDefault();
+            goToUrl();
+        })
+
+        // Work With URL
+        let url_string = window.location.href;
+        let url = new URL(url_string);
+
+        // Work with Input Value
+        let value = url.searchParams.get("value");
+        let valueBlocks = document.getElementsByClassName("value");
+        for (i = 0; i < valueBlocks.length; i++) {
+            valueBlocks[i].innerHTML = value;
+        }
+
+        if (value) {
+            placeholder = value;
+            document.getElementById('result').style.border = '30px solid rgb(' + value + ')';
+
+        } else {
+            placeholder = 'Введіть значення';
+            value = '';
+        }
+
+        colorInput.placeholder = placeholder;
+        document.title = 'Конвертувати RGB ' + value + ' в HEX онлайн';
+
+        // Format
+        let formatBlocks = document.getElementsByClassName("format");
+        for (i = 0; i < formatBlocks.length; i++) {
+            formatBlocks[i].innerHTML = inputFormat;
+        }
+
+        // Work with result
+        if (value) {
+            let result = rgb2hex(value);
+            let resultBlocks = document.getElementsByClassName("result");
+            for (i = 0; i < resultBlocks.length; i++) {
+                resultBlocks[i].innerHTML = result;
+            }
+        }
+
+        // Random Colors
+        function getRandomRgb() {
+        var num = Math.round(0xffffff * Math.random());
+        var r = num >> 16;
+        var g = num >> 8 & 255;
+        var b = num & 255;
+        return r + ', ' + g + ', ' + b;
+        }
+
+        let relatedColorsBlock = document.getElementById("related-colors");
+        for (var i = 0; i < 13; i++) {
+        let relatedColorLink = document.createElement('a');
+            currentColor = getRandomRgb();
+            relatedColorLink.setAttribute('href', '../../uk/converters/rgb-to-hex.html?value=' + currentColor.replace(/ /g, ''));
+            relatedColorLink.setAttribute('target', '_blank');
+            relatedColorLink.style.border = '30px solid rgb(' + currentColor + ')';
+            relatedColorLink.innerHTML = 'Конвертувати RGB ' + currentColor + ' в HEX';
+            relatedColorsBlock.appendChild(relatedColorLink);
+        }
+
+        // Hide form if parameter exists
+        if (value) {
+            let converterForm = document.getElementById("form");
+            converterForm.style.display = 'none';
+        }
+
+        // Hide result if parameter doesn't exists
+        if (!value) {
+            let converterForm = document.getElementById("result");
+            converterForm.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
