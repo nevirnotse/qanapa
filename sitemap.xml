@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc>http://qanapa.com/</loc>
+	</url>
+	<url>
+		<loc>https://qanapa.com/uk/converters/cmyk-to-rgb.html</loc>
+	</url>
+   	<url>
+		<loc>https://qanapa.com/uk/converters/hex-to-rgb.html</loc>
+	</url> 
+    <url>
+		<loc>https://qanapa.com/uk/converters/hwb-to-rgb.html</loc>
+	</url> 
+    <url>
+		<loc>https://qanapa.com/uk/converters/rgb-to-cmyk.html</loc>
+	</url>
+   	<url>
+		<loc>https://qanapa.com/uk/converters/rgb-to-hex.html</loc>
+	</url> 
+    <url>
+		<loc>https://qanapa.com/uk/converters/rgb-to-hwb.html</loc>
+	</url> 
+</urlset>
