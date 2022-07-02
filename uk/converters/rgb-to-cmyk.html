@@ -155,17 +155,23 @@
             relatedColorsBlock.appendChild(relatedColorLink);
         }
 
+        let link = document.createElement('link');
+        link.rel = "canonical"
+
         // Hide form if parameter exists
         if (value) {
             let converterForm = document.getElementById("form");
             converterForm.style.display = 'none';
+            link.href = "https://qanapa.com/uk/converters/rgb-to-cmyk.html?value=" + value;
         }
 
         // Hide result if parameter doesn't exists
         if (!value) {
             let converterForm = document.getElementById("result");
             converterForm.style.display = 'none';
+            link.href = "https://qanapa.com/uk/converters/rgb-to-cmyk.html";
         }
+        document.getElementsByTagName('head')[0].appendChild(link);
     </script>
 </body>
 
