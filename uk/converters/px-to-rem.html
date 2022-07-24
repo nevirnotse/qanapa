@@ -38,17 +38,26 @@
         <p>онлайн-інструменти</p>
         <hr>
     </nav>
-    <div class="text-center">
+    <div id="form" class="text-center">
         <label for="color">Конвертувати PX в REM</label>
         <span>Введіть PX значення нижче</span>
         <br>
         <br>
-        <input type='text' id='pxInput' />
+        <input id='pxInput' type="number" min="1" />
         <p>REM: <span id="pxRemResult"></span></p>
         <hr>
     </div>
+    <div id="form-result" class="text-center">
+        <label for="color">Конвертувати PX в REM</label>
+        <input type='text' id='pxInputReadOnly' readonly/>
+        <p>REM: <span id="pxRemResultReadOnly"></span></p>
+        <p>
+            <a href="../../uk/converters/px-to-rem.html">Конвертувати інше значення PX (перейти до форми)</a>
+        </p>
+        <hr>
+    </div>
     <h2 class="text-center">Приклади PX / REM конвертацій:</h2>
-    <div id="conversions-examples">
+    <div id="conversions-examples" class="text text-center links-list">
     </div>
     <br>
 
@@ -62,15 +71,64 @@
     </div>
 
     <script>
+        let input = document.getElementById('pxInputReadOnly');
+
+        let url_string = window.location.href;
+        let url = new URL(url_string);
+        let value = url.searchParams.get("value");
+
+        let start = 0
+        if (value) {
+            start = Number(value);
+            input.value = start;
+        }
+        let end = start + 13;
+
+        const range = (start, end, length = end - start) =>
+        Array.from({ length }, (_, i) => start + i)
+
+        let conversionsExamples = range(start, end)
+
+        let examplesBlock = document.getElementById("conversions-examples");
+        conversionsExamples.forEach( el => {
+            el += 1;
+            let exampleLink = document.createElement('a');
+            exampleLink.setAttribute('href', '../../uk/converters/px-to-rem.html?value=' + el);
+            exampleLink.setAttribute('target', '_blank');
+            exampleLink.innerHTML = 'Конвертувати ' + el + ' PX в REM';
+            examplesBlock.appendChild(exampleLink);
+        })
+
         const pxInput = document.getElementById('pxInput');
         const pxRemResult = document.getElementById('pxRemResult');
+        const pxRemResultReadOnly = document.getElementById('pxRemResultReadOnly');
 
-        const inputHandlerPxConverter = function (e) {
-            pxRemResult.innerHTML = e.target.value * 0.0625;
+        if (value) {
+            pxRemResultReadOnly.innerHTML = value * 0.0625;
+        } else {
+            const inputHandlerPxConverter = function (e) {
+                pxRemResult.innerHTML = e.target.value * 0.0625;
+            }
+            pxInput.addEventListener('input', inputHandlerPxConverter);
+            pxInput.addEventListener('propertychange', inputHandlerPxConverter);
         }
 
-        pxInput.addEventListener('input', inputHandlerPxConverter);
-        pxInput.addEventListener('propertychange', inputHandlerPxConverter);
+
+        let link = document.createElement('link');
+        link.rel = "canonical"
+
+        if (value) {
+            let converterForm = document.getElementById("form");
+            converterForm.style.display = 'none';
+            link.href = "https://qanapa.com/uk/converters/px-to-rem.html?value=" + value;
+        }
+
+        if (!value) {
+            let converterForm = document.getElementById("form-result");
+            converterForm.style.display = 'none';
+            link.href = "https://qanapa.com/uk/converters/px-to-rem.html";
+        }
+        document.getElementsByTagName('head')[0].appendChild(link);
     </script>
 </body>
 

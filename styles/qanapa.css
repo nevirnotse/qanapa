@@ -17,6 +17,15 @@ a.logo {
     list-style: none;
 }
 
+.links-list a {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.links-list a:hover {
+    border-bottom: 0;
+}
+
 h1 {
     font-size: 18px;
 }
