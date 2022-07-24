@@ -10,7 +10,8 @@ a.logo {
 .gray-border {
     border: 5px solid gray;
 }
-#color-converters-list ul {
+
+.list ul {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -24,7 +25,7 @@ h2 {
     font-size: 16px;
 }
 
-#related-colors a{
+#related-colors a {
     display: block;
     text-align: center;
     padding: 20px;
